@@ -8,6 +8,7 @@ import SetupInitialPage from "./Components/Setup/SetupInitialPage"
 import SetupPersonalInfoPage from './Components/Setup/SetupPersonalInfoPage' // Not yet used
 import StonkPreviewTest from './Components/StonkPreviewTest';
 import SingleStonk from './Components/SingleStonk';
+import Dashboard from './Components/Dashboard/DasboardMain'
 
 // App Component
 // This is the MAIN component that should be treated 
@@ -22,6 +23,7 @@ const App = () => {
         <Route exact path="/setup/personal-info" component={SetupPersonalInfoPage} />
         <Route exact path="/stonk-preview-test" component={StonkPreviewTest} />
         <Route exact path="/single-stonk/:name" component={SingleStonk} />
+        <Route exact path="/account/dashboard" component={Dashboard} />
       </Switch>
     </BrowserRouter>
   )

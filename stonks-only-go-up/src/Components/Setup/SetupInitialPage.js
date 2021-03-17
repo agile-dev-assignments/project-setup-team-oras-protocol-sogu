@@ -13,6 +13,7 @@ const SetupInitialPage = (props) => {
             <p>Let's continue setting up your account with some basic information!</p>
             <div>
                 <button onClick={() => props.history.push('/setup/personal-info')}>Begin Account Setup</button>
+                <button onClick={() => props.history.push('/account/dashboard')}>Dashboard</button>
             </div>
         </div>
     )
