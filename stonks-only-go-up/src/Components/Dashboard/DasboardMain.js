@@ -11,7 +11,9 @@ const Pane1 = (props) => {
     return (
         <div>
             <h1>First Pane</h1>
-            <button onClick={() => props.history.push('/')}>Back To Start</button>
+            <div>
+                <button onClick={() => props.history.push('/')}>Back To Start</button>
+            </div>
         </div>
     )
 }
@@ -20,19 +22,21 @@ const Pane2 = (props) => {
     return (
         <div>
             <h1>Second Pane</h1>
-            <button onClick={() => props.history.push('/setup/initial')}>Setup Initial Page</button>
+            <div>
+                <button onClick={() => props.history.push('/setup/initial')}>Setup Initial Page</button>
+            </div>
         </div>
     )
 }
 
 const SplitPane = (props) => {
     return (
-        <div className="SplitPane">
-            <div className="SplitPane-left">
-                {this.props.left}
+        <div>
+            <div>
+                {props.left}
             </div>
-            <div className="SplitPane-right">
-                {this.props.right}
+            <div>
+                {props.right}
             </div>
         </div>
     )
