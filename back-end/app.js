@@ -6,9 +6,17 @@ const app = express()
 const finnhub = require('finnhub')
 const api_key = finnhub.ApiClient.instance.authentications['api_key'];
 const finnhubClient = new finnhub.DefaultApi();
+const twitter = require('twitter')
+require("dotenv").config({ silent: true })
 
 
 api_key.apiKey = "c1l3joa37fko6in4vvcg";
+
+twitter = {
+    consumer_key: process.env.TWITTER_API_KEY,
+    consumer_secret:process.env.TWITTER_API_SECRET_KEY,
+    bearer_token: process.env.TWITTER_BEARER_TOKEN
+   }
 
 
 app.use(express.static('public'))
@@ -28,6 +36,22 @@ app.get('/reset', (req, res) => {
 
 app.get('/signup', (req, res) => {
     //Nothing here yet, not even sure if we will need it.
+})
+
+app.use((req,res,next)=>{
+    let tw = new Twitter(twitter);
+    //searches and displays latest 10 tweets about the stock
+    tw.get('search/tweets',{
+        q:req.params.name,
+        count: 10
+    })
+        .then(res => {
+            console.log(`Response: `,res);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    next()
 })
 
 app.get('/single-stonk/:name', (req, res) => {
