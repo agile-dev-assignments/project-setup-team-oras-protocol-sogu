@@ -8,6 +8,13 @@ const AuthController = require('./auth/AuthController');
 const FollowController = require('./follow/FollowController')
 const {Stonk, Tweet} = require('./schemas')
 const User = require('./user/User');
+const Twit = require('twit');
+const T = new Twit({
+    consumer_key: process.env.consumer_key,
+    consumer_key_secret: process.env.consumer_key_secret,
+    access_token: process.env.access_token,
+    access_token_secret: process.env.consumer_key_secret
+});
 
 
 const app = express()
@@ -146,3 +153,25 @@ app.get('/hype', async (req,res) => {
 
 //
 module.exports = app
+
+//returns streaming object
+function getStream(tracking){
+    return T.stream('statuses/filter', {track: tracking});
+}
+
+function getTweet(tweet){
+    var tweetIn = {
+        text = tweet.text,
+        username = tweet.user.name,
+        creationTime = tweet.created_at,
+        userURL = tweet.user.url,
+        tweetID = tweet.id_str,
+        quoteCount = tweet.quoute_count,
+        replyCount = tweet.reply_count,
+        retweetCount = tweet.retweet_count,
+        favoriteCount = tweet.favorite_count,
+        userFollowers = tweet.user.followers_count
+
+    }
+    return tweetIn;
+}
