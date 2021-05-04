@@ -127,6 +127,23 @@ app.get('/single-stonk/:name', (req, res) => {
 
 })
 
+
+app.post('/setup/confirm', (req,res) =>{
+
+    const personalInfo = {
+        user_name = req.user_name,
+        followed = req.personalInfo.followed
+    }
+
+
+    db.collections.users.updateOne({user_name: personalInfo.user_name}, {
+        $set: {
+            followed: personalInfo.followed
+        }
+    }, {upsert: true})
+
+})
+
 //This endpoint is only for testing the stonk schema
 app.get('/stonk-schema-test', (req, res) => {
     const newStonk = new Stonk({
